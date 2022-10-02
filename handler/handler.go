@@ -34,7 +34,7 @@ func Gettel(c *gin.Context) {
 func Changetel(c *gin.Context) {
 	tel := c.Param("tel")
 	test := resty.New().SetTLSClientConfig(&tls.Config{InsecureSkipVerify: true})
-	resp, err := test.R().Get("http://home.labulac.top:40080/changetel/" + ":" + tel)
+	resp, err := test.R().Get("http://home.labulac.top:40080/changetel/" + tel)
 	if err != nil {
 
 		c.String(http.StatusBadRequest, "err2")
