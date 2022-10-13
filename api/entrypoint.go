@@ -16,6 +16,9 @@ func registerRouter(r *gin.RouterGroup) {
 	r.GET("/ping", handler.Ping)
 	r.GET("/gettel", handler.Gettel)
 	r.GET("/changetel/:tel", handler.Changetel)
+	r.GET("/change58/:status", handler.Change58status)
+	r.GET("/58tc", handler.CashSignin58)
+	r.GET("/58tc", handler.Jimi)
 }
 
 // init gin app
