@@ -93,3 +93,16 @@ func Jimi(c *gin.Context) {
 	c.String(http.StatusOK, telphote.String())
 
 }
+
+func Get58(c *gin.Context) {
+
+	test := resty.New().SetTLSClientConfig(&tls.Config{InsecureSkipVerify: true})
+	resp, err := test.R().Get("http://home.labulac.top:40080/get58")
+	if err != nil {
+
+		c.String(http.StatusInternalServerError, "远端不可达")
+	}
+	tel := gjson.Get(resp.String(), "msg")
+
+	c.String(http.StatusOK, tel.String())
+}
