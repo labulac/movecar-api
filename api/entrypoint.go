@@ -20,6 +20,7 @@ func registerRouter(r *gin.RouterGroup) {
 	r.GET("/58tc", handler.CashSignin58)
 	r.GET("/jimi", handler.Jimi)
 	r.GET("/get58", handler.Get58)
+	r.GET("/wechat", handler.Wechat)
 }
 
 // init gin app
