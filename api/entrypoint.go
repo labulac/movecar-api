@@ -21,6 +21,7 @@ func registerRouter(r *gin.RouterGroup) {
 	r.GET("/jimi", handler.Jimi)
 	r.GET("/get58", handler.Get58)
 	r.GET("/wechat", handler.Wechat)
+	r.GET("/sub",handler.Sub)
 }
 
 // init gin app

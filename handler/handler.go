@@ -5,6 +5,7 @@ import (
 	"crypto/tls"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"sort"
@@ -146,4 +147,34 @@ func Wechat(ctx *gin.Context) {
 		return
 	}
 	log.Println("validateUrl Ok")
+}
+
+func Sub(c *gin.Context) {
+	resp1, err := http.Get("https://ghproxy.com/https://gist.githubusercontent.com/labulac/683e328ec813a45999b5893194189ac2/raw/sub.txt")
+	if err != nil {
+		c.String(http.StatusBadRequest, "Get sub file error: %v", err)
+		return
+	}
+	defer resp1.Body.Close()
+	content, err := ioutil.ReadAll(resp1.Body)
+	if err != nil {
+		c.String(http.StatusBadRequest, "Read sub file error: %v", err)
+		return
+	}
+
+	lines := strings.Split(string(content), "\n")
+
+	var cleanedLines []string
+
+	for _, line := range lines {
+		trimmedLine := strings.TrimSpace(line)
+		if trimmedLine != "" && !strings.HasPrefix(trimmedLine, " ") && !strings.HasPrefix(trimmedLine, "#") {
+			cleanedLines = append(cleanedLines, trimmedLine)
+		}
+	}
+
+	str := strings.Join(cleanedLines, "|")
+
+	c.String(http.StatusOK, string(str))
+
 }
