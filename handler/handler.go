@@ -22,7 +22,7 @@ func Ping(c *gin.Context) {
 	resp, err := test.R().Get("http://home.labulac.top:40080/ping")
 	if err != nil {
 
-		c.String(http.StatusInternalServerError, "远端不可达")
+		c.String(http.StatusInternalServerError, "ping远端不可达")
 	}
 
 	c.String(http.StatusOK, resp.String())
